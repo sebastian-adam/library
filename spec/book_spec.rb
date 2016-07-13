@@ -51,15 +51,12 @@ describe(Book) do
     end
   end
 
-
-
-  # describe('#id') do
-  #   it('returns the id of a given book') do
-  #     book1 = Book.new({:id => nil, :title => 'Alice in Wonderland', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'fantasy'})
-  #     expect(book1.id()).to(be_an_instance_of(Fixnum))
-  #   end
-  # end
-
-
+  describe('#id') do
+    it('returns the id of a given book') do
+      book1 = Book.new({:id => nil, :title => 'Alice in Wonderland', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'fantasy'})
+      book1.save()
+      expect(book1.id()).to(be_an_instance_of(Fixnum))
+    end
+  end
 
 end
