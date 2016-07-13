@@ -37,7 +37,8 @@ patch('/books/:id') do
   author_last = params.fetch('author_last')
   author_first = params.fetch('author_first')
   genre = params.fetch('genre')
-  @book = Book.find(perams.fetch('id').to_i())
+  @book = Book.find(params.fetch('id').to_i())
   @book.update({:title => title, :author_first => author_first, :author_last => author_last, :genre => genre})
+  @books = Book.all()
   erb(:index)
 end
