@@ -1,0 +1,38 @@
+<% if @books.any?() %>
+  <h3>Here is a list of books in our database.</h3>
+  <table>
+    <tr id="table_head">
+      <td>TITLE</td>
+      <td>AUTHOR (last, first)</td>
+      <td>GENRE</td>
+    </tr>
+    <% @books.each() do |book| %>
+      <tr>
+        <td><%= book.title() %></td>
+        <td><%= book.author_last() %>, <%= book.author_first() %></td>
+        <td><%= book.genre() %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3>There are no books in the databse. Please add one below.</h3>
+<% end %>
+
+<h3>Add a book:</h3>
+
+<form action="/books" method="post">
+  <label for="title">Title:</label>
+  <input type="text" name="title">
+
+  <label for="author_last">Author's Last Name:</label>
+  <input type="text" name="author_last">
+
+  <label for="author_first">Author's First Name:</label>
+  <input type="text" name="author_first">
+
+  <label for="genre">Genre:</label>
+  <input type="text" name="genre">
+
+  <button type="submit" name="button">Add a book</button>
+
+</form>
