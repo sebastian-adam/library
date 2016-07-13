@@ -5,16 +5,16 @@
       <td>TITLE</td>
       <td>AUTHOR (last, first)</td>
       <td>GENRE</td>
-      <td></td>
-      <td></td>
+      <td class="administrative"></td>
+      <td class="administrative"></td>
     </tr>
     <% @search_results.each() do |book| %>
       <tr>
         <td><%= book.title() %></td>
         <td><%= book.author_last() %>, <%= book.author_first() %></td>
         <td><%= book.genre() %></td>
-        <td><a href="/books/<%= book.id() %>/edit">EDIT</a></td>
-        <td>
+        <td class="administrative"><a href="/books/<%= book.id() %>/edit">EDIT</a></td>
+        <td class="administrative">
           <form action="/books/<%= book.id() %>" method="post">
             <input name="_method" type="hidden" value="delete">
             <button id="delete_button" type="submit">DELETE</button>

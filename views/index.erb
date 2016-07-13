@@ -1,7 +1,7 @@
 <h3>Are you a librarian?</h3>
 <form>
   <input type="radio" name="librarian" value="true">Yes<br>
-  <input type="radio" name="librarian" value="false">No<br>
+  <input type="radio" name="librarian" value="false" checked="checked">No<br>
 </form>
 
 <hr>
@@ -13,16 +13,16 @@
       <td>TITLE</td>
       <td>AUTHOR (last, first)</td>
       <td>GENRE</td>
-      <td></td>
-      <td></td>
+      <td class="administrative"></td>
+      <td class="administrative"></td>
     </tr>
     <% @books.each() do |book| %>
       <tr>
         <td><%= book.title() %></td>
         <td><%= book.author_last() %>, <%= book.author_first() %></td>
         <td><%= book.genre() %></td>
-        <td><a href="/books/<%= book.id() %>/edit">EDIT</a></td>
-        <td>
+        <td class="administrative"><a href="/books/<%= book.id() %>/edit">EDIT</a></td>
+        <td class="administrative">
           <form action="/books/<%= book.id() %>" method="post">
             <input name="_method" type="hidden" value="delete">
             <button id="delete_button" type="submit">DELETE</button>
@@ -35,31 +35,33 @@
   <h3>There are no books in the databse. Please add one below.</h3>
 <% end %>
 
-<h3>Add a book:</h3>
+<div class="administrative">
+  <h3>Add a book:</h3>
 
-<form action="/books" method="post">
-  <label for="title">Title:</label>
-  <input type="text" name="title">
+  <form action="/books" method="post">
+    <label for="title">Title:</label>
+    <input type="text" name="title">
 
-  <label for="author_last">Author's Last Name:</label>
-  <input type="text" name="author_last">
+    <label for="author_last">Author's Last Name:</label>
+    <input type="text" name="author_last">
 
-  <label for="author_first">Author's First Name:</label>
-  <input type="text" name="author_first">
+    <label for="author_first">Author's First Name:</label>
+    <input type="text" name="author_first">
 
-  <label for="genre">Genre:</label>
-  <input type="text" name="genre">
+    <label for="genre">Genre:</label>
+    <input type="text" name="genre">
 
-  <button type="submit" name="button">Add book</button>
+    <button type="submit" name="button">Add book</button>
 
-</form>
+  </form>
+</div>
 
 <hr>
 
 <h3>Search by Title:</h3>
 <form action="/search/title" method="post">
-  <label for="title">Title:</label>
-  <input type="text" name="title">
+  <label for="title_search">Title:</label>
+  <input type="text" name="title_search">
 
   <button type="submit" name="button">Find book</button>
 </form>
@@ -67,8 +69,8 @@
 <h3>Search by Author:</h3>
 <form action="/search/author" method="post">
 
-  <label for="author_last">Author's Last Name:</label>
-  <input type="text" name="author_last">
+  <label for="author_last_search">Author's Last Name:</label>
+  <input type="text" name="author_last_search">
 
   <button type="submit" name="button">Find author</button>
 </form>

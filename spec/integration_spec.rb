@@ -29,3 +29,5 @@ describe('add book path', {:type => :feature}) do
     expect(page).to have_content('Alice in Wonderland Carroll, Lewis fantasy')
   end
 end
+
+# FINISH BOOKS INTEGRATION SPEC

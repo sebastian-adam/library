@@ -90,11 +90,5 @@ describe(Book) do
     end
   end
 
-  describe('.search') do
-    it('returns no record found for a false search') do
-      
-    end
-
-    it('lets user search for a book in the database') do
-  end
+# DO SEARCH SPEC
 end
