@@ -69,4 +69,14 @@ describe(Book) do
     end
   end
 
+  # describe('#update') do
+  #   it('lets user update a book in the database') do
+  #     book1 = Book.new({:id => nil, :title => 'Alice in Wonderland', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'fantasy'})
+  #     book1.save()
+  #     book1.update({:title => 'Through the Looking Glass', :genre => 'kids'})
+  #     expect(book1.title()).to(eq('Through the Looking Glass'))
+  #     expect(book1.genre()).to(eq('kids'))
+  #   end
+  # end
+
 end

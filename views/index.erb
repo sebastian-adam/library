@@ -5,12 +5,14 @@
       <td>TITLE</td>
       <td>AUTHOR (last, first)</td>
       <td>GENRE</td>
+      <td></td>
     </tr>
     <% @books.each() do |book| %>
       <tr>
         <td><%= book.title() %></td>
         <td><%= book.author_last() %>, <%= book.author_first() %></td>
         <td><%= book.genre() %></td>
+        <td><a href="/books/<%= book.id() %>/edit">EDIT</a></td>
       </tr>
     <% end %>
   </table>
@@ -33,6 +35,6 @@
   <label for="genre">Genre:</label>
   <input type="text" name="genre">
 
-  <button type="submit" name="button">Add a book</button>
+  <button type="submit" name="button">Add book</button>
 
 </form>
