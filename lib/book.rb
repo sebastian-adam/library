@@ -42,6 +42,30 @@ class Book
     found_book
   end
 
+  define_singleton_method(:search_title) do |keyword|
+    found_books = []
+    found_book = nil
+    Book.all().each() do |book|
+      if book.title().==(keyword)
+        found_book = book
+        found_books.push(book)
+      end
+    end
+    found_books
+  end
+
+  define_singleton_method(:search_author) do |keyword|
+    found_books = []
+    found_book = nil
+    Book.all().each() do |book|
+      if book.author_last().==(keyword)
+        found_book = book
+        found_books.push(book)
+      end
+    end
+    found_books
+  end
+
   define_method(:update) do |attributes|
     @id = self.id()
     @title = attributes.fetch(:title)
@@ -49,6 +73,10 @@ class Book
     @author_last = attributes.fetch(:author_last)
     @genre = attributes.fetch(:genre)
     DB.exec("UPDATE books SET title = '#{@title}', author_last = '#{@author_last}', author_first = '#{@author_first}', genre = '#{@genre}' WHERE id = #{@id};")
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM books WHERE id = #{self.id()};")
   end
 
 end

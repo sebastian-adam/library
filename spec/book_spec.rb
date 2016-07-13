@@ -69,14 +69,32 @@ describe(Book) do
     end
   end
 
-  # describe('#update') do
-  #   it('lets user update a book in the database') do
-  #     book1 = Book.new({:id => nil, :title => 'Alice in Wonderland', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'fantasy'})
-  #     book1.save()
-  #     book1.update({:title => 'Through the Looking Glass', :genre => 'kids'})
-  #     expect(book1.title()).to(eq('Through the Looking Glass'))
-  #     expect(book1.genre()).to(eq('kids'))
-  #   end
-  # end
+  describe('#update') do
+    it('lets user update a book in the database') do
+      book1 = Book.new({:id => nil, :title => 'Alice in Wonderland', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'fantasy'})
+      book1.save()
+      book1.update({:id => nil, :title => 'Through the Looking Glass', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'kids'})
+      expect(book1.title()).to(eq('Through the Looking Glass'))
+      expect(book1.genre()).to(eq('kids'))
+    end
+  end
 
+  describe('#delete') do
+    it('lets user delete a book from the database') do
+      book1 = Book.new({:id => nil, :title => 'Alice in Wonderland', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'fantasy'})
+      book1.save()
+      book2 = Book.new({:id => nil, :title => 'Invisible Man', :author_first => 'Ralph', :author_last => 'Ellison', :genre => 'social commentary'})
+      book2.save()
+      book1.delete()
+      expect(Book.all()).to(eq([book2]))
+    end
+  end
+
+  describe('.search') do
+    it('returns no record found for a false search') do
+      
+    end
+
+    it('lets user search for a book in the database') do
+  end
 end

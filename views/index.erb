@@ -1,3 +1,11 @@
+<h3>Are you a librarian?</h3>
+<form>
+  <input type="radio" name="librarian" value="true">Yes<br>
+  <input type="radio" name="librarian" value="false">No<br>
+</form>
+
+<hr>
+
 <% if @books.any?() %>
   <h3>Here is a list of books in our database.</h3>
   <table>
@@ -6,6 +14,7 @@
       <td>AUTHOR (last, first)</td>
       <td>GENRE</td>
       <td></td>
+      <td></td>
     </tr>
     <% @books.each() do |book| %>
       <tr>
@@ -13,6 +22,12 @@
         <td><%= book.author_last() %>, <%= book.author_first() %></td>
         <td><%= book.genre() %></td>
         <td><a href="/books/<%= book.id() %>/edit">EDIT</a></td>
+        <td>
+          <form action="/books/<%= book.id() %>" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button id="delete_button" type="submit">DELETE</button>
+          </form>
+        </td>
       </tr>
     <% end %>
   </table>
@@ -37,4 +52,23 @@
 
   <button type="submit" name="button">Add book</button>
 
+</form>
+
+<hr>
+
+<h3>Search by Title:</h3>
+<form action="/search/title" method="post">
+  <label for="title">Title:</label>
+  <input type="text" name="title">
+
+  <button type="submit" name="button">Find book</button>
+</form>
+
+<h3>Search by Author:</h3>
+<form action="/search/author" method="post">
+
+  <label for="author_last">Author's Last Name:</label>
+  <input type="text" name="author_last">
+
+  <button type="submit" name="button">Find author</button>
 </form>

@@ -1,3 +1,7 @@
+/*body {
+  background-color: green;
+}*/
+
 table {
   width: 50%;
   border: 1px solid black;
@@ -10,4 +14,10 @@ td {
 
 #table_head {
   font-weight: bold;
+}
+
+#delete_button {
+  background-color: inherit;
+  border: none;
+  color: red;
 }

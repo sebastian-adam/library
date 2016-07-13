@@ -42,3 +42,24 @@ patch('/books/:id') do
   @books = Book.all()
   erb(:index)
 end
+
+delete('/books/:id') do
+  @book = Book.find(params.fetch('id').to_i())
+  @book.delete()
+  @books = Book.all()
+  erb(:index)
+end
+
+post('/search/title') do
+  title = params.fetch('title')
+  @search_term = title
+  @search_results = Book.search_title(title)
+  erb(:search_results)
+end
+
+post('/search/author') do
+  author_last = params.fetch('author_last')
+  @search_term = author_last
+  @search_results = Book.search_author(author_last)
+  erb(:search_results)
+end
