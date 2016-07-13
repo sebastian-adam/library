@@ -59,4 +59,14 @@ describe(Book) do
     end
   end
 
+  describe('.find') do
+    it('returns a book by its id') do
+      book1 = Book.new({:id => nil, :title => 'Alice in Wonderland', :author_first => 'Lewis', :author_last => 'Carroll', :genre => 'fantasy'})
+      book1.save()
+      book2 = Book.new({:id => nil, :title => 'Invisible Man', :author_first => 'Ralph', :author_last => 'Ellison', :genre => 'social commentary'})
+      book2.save()
+      expect(Book.find(book1.id())).to(eq(book1))
+    end
+  end
+
 end

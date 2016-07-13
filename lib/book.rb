@@ -26,10 +26,20 @@ class Book
   define_method(:==) do |another_book|
     self.id().==(another_book.id()).&(self.title().==(another_book.title())).&(self.author_first().==(another_book.author_first())).&(self.author_last().==(another_book.author_last())).&(self.genre().==(another_book.genre()))
   end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO books (title, author_first, author_last, genre) VALUES ('#{@title}', '#{@author_first}', '#{@author_last}', '#{@genre}') RETURNING id;")
     @id = result.first().fetch('id').to_i()
   end
 
+  define_singleton_method(:find) do |id|
+    found_book = nil
+    Book.all().each() do |book|
+      if book.id().==(id)
+        found_book = book
+      end
+    end
+    found_book
+  end
 
 end
