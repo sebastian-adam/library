@@ -91,12 +91,6 @@ post('/patrons/:patron_id/books/:book_id/checkout') do
   erb(:patron)
 end
 
-patch('/checkouts/:id') do
-  @books = Book.all()
-  @checkouts = Checkout.all()
-  erb(:librarian)
-end
-
 patch('/books/:id') do
   title = params.fetch('title')
   author_last = params.fetch('author_last')
@@ -105,6 +99,7 @@ patch('/books/:id') do
   @book = Book.find(params.fetch('id').to_i())
   @book.update({:title => title, :author_first => author_first, :author_last => author_last, :genre => genre})
   @books = Book.all()
+  @checkouts = Checkout.all()
   if @@librarian == true
     erb(:librarian)
   else
@@ -116,6 +111,7 @@ delete('/books/:id') do
   @book = Book.find(params.fetch('id').to_i())
   @book.delete()
   @books = Book.all()
+  @checkouts = Checkout.all()
   if @@librarian == true
     erb(:librarian)
   else
