@@ -3,7 +3,7 @@
 }*/
 
 table {
-  width: 50%;
+  width: 80%;
   border: 1px solid black;
 }
 
@@ -22,7 +22,7 @@ td {
   color: red;
 }
 
-#edit_link {
+.edit_link {
   color: #0000cd;
 }
 
@@ -90,4 +90,8 @@ td {
 #search_title {
   float: left;
   margin-right: 30px;
+}
+
+#overdue {
+  color: red;
 }

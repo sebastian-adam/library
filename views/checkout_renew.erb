@@ -1,0 +1,19 @@
+<div id="header">
+  <div id="patron_portal_header">
+    <h1>Renew checkout <span class="glyphicon glyphicon-book"></span></h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <h3>Please confirm your checkout for "<%= @book.title() %>"</h3>
+  <form action="/patrons/<%= @patron.id() %>/books/<%= @book.id() %>/checkout" method="post">
+    <label for="date">Check out date:</label>
+    <input type="date" name="date" required>
+
+    <button class="button" type="submit" name="button">Add book</button>
+  </form>
+</div>
+
+<hr>

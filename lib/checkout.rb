@@ -1,9 +1,10 @@
 class Checkout
-  attr_reader(:id, :date, :books_id, :patrons_id)
+  attr_reader(:id, :date, :due_date, :books_id, :patrons_id)
 
   define_method(:initialize) do |attributes|
     @id = attributes.fetch(:id)
     @date = attributes.fetch(:date)
+    @due_date = attributes.fetch(:due_date)
     @books_id = attributes.fetch(:books_id)
     @patrons_id = attributes.fetch(:patrons_id)
   end
@@ -14,15 +15,16 @@ class Checkout
     returned_checkouts.each() do |checkout|
       id = checkout.fetch('id').to_i
       date = checkout.fetch('date')
+      due_date = checkout.fetch('due_date')
       books_id = checkout.fetch('books_id').to_i
       patrons_id = checkout.fetch('patrons_id').to_i
-      checkouts.push(Checkout.new({:id => id, :date => date, :books_id => books_id, :patrons_id => patrons_id}))
+      checkouts.push(Checkout.new({:id => id, :date => date, :due_date => due_date, :books_id => books_id, :patrons_id => patrons_id}))
     end
     checkouts
   end
 
   define_method(:==) do |another_checkout|
-    self.id().==(another_checkout.id()).&(self.date().==(another_checkout.date())).&(self.books_id().==(another_checkout.books_id())).&(self.patrons_id().==(another_checkout.patrons_id()))
+    self.id().==(another_checkout.id()).&(self.date().==(another_checkout.date())).&(self.due_date().==(another_checkout.due_date())).&(self.books_id().==(another_checkout.books_id())).&(self.patrons_id().==(another_checkout.patrons_id()))
   end
 
   define_method(:save) do
@@ -44,8 +46,13 @@ class Checkout
     DB.exec("DELETE FROM checkouts WHERE id = #{self.id()};")
   end
 
-  define_method(:due) do
-    DB.exec("SELECT #{self.date()}, DATEADD(dd, 14, #{self.date()}) AS DueDate FROM checkouts WHERE id = #{self.id()};")
+  define_method(:due_date) do
+    @due_date = Date.parse(self.date()) + 14
+    if DateTime.now.to_date > @due_date
+      "Overdue"
+    else
+      @due_date
+    end
   end
 
 end

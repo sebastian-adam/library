@@ -63,6 +63,25 @@
 
 <hr>
 
+<% if @checkouts.any?() %>
+  <h3>Here is a list of books that you have checked out.</h3>
+  <table>
+    <tr id="table_head">
+      <td>Checked out on</td>
+      <td>BOOK</td>
+      <!-- <td class="administrative"></td> -->
+    </tr>
+    <% @checkouts.each() do |checkout| %>
+      <tr>
+        <td><%= checkout.date() %></td>
+        <td><%=Book.find(checkout.books_id()).title()%></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3>You better start reading!.</h3>
+<% end %>
+
 <% if @books.any?() %>
   <h3>Here is a list of books in our database.</h3>
   <table>

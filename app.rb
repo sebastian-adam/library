@@ -42,6 +42,7 @@ post('/patrons') do
     @header = "Welcome"
   end
   @books = Book.all()
+  @checkouts = Checkout.all()
   erb(:patron)
 end
 
@@ -53,6 +54,7 @@ post('/books') do
   book = Book.new({:id => nil, :title => title, :author_last => author_last, :author_first => author_first, :genre => genre})
   book.save()
   @books = Book.all()
+  @checkouts = Checkout.all()
   if @@librarian == true
     erb(:librarian)
   else
@@ -82,10 +84,17 @@ post('/patrons/:patron_id/books/:book_id/checkout') do
   patrons_id = @patron.id()
   @book = Book.find(params.fetch('book_id').to_i())
   books_id = @book.id()
-  checkout = Checkout.new({:id => nil, :date => date, :books_id => books_id, :patrons_id => patrons_id})
+  checkout = Checkout.new({:id => nil, :date => date, :due_date => nil, :books_id => books_id, :patrons_id => patrons_id})
   checkout.save()
   @books = Book.all()
+  @checkouts = Checkout.all()
   erb(:patron)
+end
+
+patch('/checkouts/:id') do
+  @books = Book.all()
+  @checkouts = Checkout.all()
+  erb(:librarian)
 end
 
 patch('/books/:id') do

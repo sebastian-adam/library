@@ -79,7 +79,7 @@
         <td><%= book.title() %></td>
         <td><%= book.author_last() %>, <%= book.author_first() %></td>
         <td><%= book.genre() %></td>
-        <td class="administrative"><a href="/books/<%= book.id() %>/edit" id="edit_link">EDIT</a></td>
+        <td class="administrative"><a href="/books/<%= book.id() %>/edit" class="edit_link">EDIT</a></td>
         <td class="administrative">
           <form action="/books/<%= book.id() %>" method="post">
             <input name="_method" type="hidden" value="delete">
@@ -99,22 +99,32 @@
   <h3>Here is a list of books that are checked out.</h3>
   <table>
     <tr id="table_head">
-      <td>Checked out on</td>
       <td>BOOK</td>
       <td>PATRON</td>
+      <td>CHECKED OUT</td>
+      <td>DUE</td>
       <td></td>
-      <!-- <td class="administrative"></td> -->
     </tr>
     <% @checkouts.each() do |checkout| %>
       <tr>
-        <td><%= checkout.date() %></td>
         <td><%=Book.find(checkout.books_id()).title()%></td>
         <td><%=Patron.find(checkout.patrons_id()).first_name()%></td>
-        <td><%= checkout.due() %></td>
+        <td><%= checkout.date() %></td>
+        <td>
+          <% if checkout.due_date() == "Overdue" %>
+            <span id="overdue"><%= checkout.due_date() %></span>
+            <form action="/checkouts/<%= checkout.id() %>" method="post">
+              <input name="_method" type="hidden" value="patch">
+              <button class="edit_link" type="submit">RENEW</button>
+            </form>
+          <% else %>
+            <%= checkout.due_date() %>
+          <% end %>
+        </td>
         <td class="administrative">
           <form action="/checkouts/<%= checkout.id() %>" method="post">
             <input name="_method" type="hidden" value="delete">
-            <button class="delete_button" type="submit">Book Returned</button>
+            <button class="delete_button" type="submit">RETURNED</button>
           </form>
         </td>
       </tr>
