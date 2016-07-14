@@ -79,3 +79,15 @@ td {
   background-color: black;
   color: white;
 }
+
+#search_title, #seach_author {
+  display: inline-block;
+  margin: 0 auto;
+  position: relative;
+  transform: translateY(-25%);
+}
+
+#search_title {
+  float: left;
+  margin-right: 30px;
+}

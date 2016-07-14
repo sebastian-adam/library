@@ -1,22 +1,23 @@
 <div id="header">
-  <!-- <div id="patron_portal_header">
-    <h1>Welcome to the <span class="glyphicon glyphicon-book"></span></h1>
+  <div id="patron_portal_header">
+    <h1>Welcome to the <span class="glyphicon glyphicon-book"></span> <%= @patron.first_name() %></h1>
   </div>
-  <div id="prompt">
+  <!-- <div id="prompt">
     <h3>Are you a librarian?</h3>
-    <form>
-      <input type="radio" name="librarian" value="true">Yes<br>
+    <form action="/librarian" method="get">
+      <button id="lib_button" type="submit">Yes</button> -->
+      <!-- <input type="radio" name="librarian" value="true">Yes<br>
       <input type="radio" name="librarian" value="false" checked="checked">No<br>
     </form>
   </div> -->
-  <div id="librarian_portal_header">
+  <!-- <div id="librarian_portal_header">
     <h1>Welcome to the librarian portal</h1>
-  </div>
+  </div> -->
 </div>
 
 <hr>
 
-<div class="administrative">
+<!-- <div class="administrative">
   <h3>Add a book:</h3>
 
   <form action="/books" method="post">
@@ -35,9 +36,7 @@
     <button class="button" type="submit" name="button">Add book</button>
 
   </form>
-</div>
-
-<hr>
+</div> -->
 
 <div id="search-nav">
   <div id="search_title">
@@ -71,30 +70,30 @@
       <td>TITLE</td>
       <td>AUTHOR (last, first)</td>
       <td>GENRE</td>
-      <td class="administrative"></td>
-      <td class="administrative"></td>
+      <td></td>
+      <!-- <td class="administrative"></td> -->
     </tr>
     <% @books.each() do |book| %>
       <tr>
         <td><%= book.title() %></td>
         <td><%= book.author_last() %>, <%= book.author_first() %></td>
         <td><%= book.genre() %></td>
-        <td class="administrative"><a href="/books/<%= book.id() %>/edit" id="edit_link">EDIT</a></td>
-        <td class="administrative">
+        <td><a href="/patrons/<%= @patron.id() %>/books/<%= book.id() %>/checkout">CHECKOUT</a></td>
+        <!-- <td class="administrative">
           <form action="/books/<%= book.id() %>" method="post">
             <input name="_method" type="hidden" value="delete">
             <button id="delete_button" type="submit">DELETE</button>
           </form>
-        </td>
+        </td> -->
       </tr>
     <% end %>
   </table>
 <% else %>
-  <h3>There are no books in the database. <span id="add_book_instruction" class="administrative"> Please add one below.</span></h3>
+  <h3>There are no books in the database. <span id="add_book_instruction" class="administrative"> Please alert a librarian.</span></h3>
 <% end %>
 
 <hr>
 
 <form action="/" method="get">
-  <button class="home_button" type="submit">Exit Librarian Portal</button>
+  <button class="home_button" type="submit">Exit Patron Portal</button>
 </form>

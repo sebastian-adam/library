@@ -7,7 +7,7 @@ set(:show_exceptions, false)
 describe('view the book path', {:type => :feature}) do
   it('shows no books when there are no books in the database') do
     visit('/')
-    expect(page).to have_content('There are no books in the databse.')
+    expect(page).to have_content('There are no books in the database.')
   end
 
   it('shows the user a table of books when there are books in the database') do
@@ -20,7 +20,7 @@ end
 
 describe('add book path', {:type => :feature}) do
   it('allows user to add a book to the database') do
-    visit('/')
+    visit('/librarian')
     fill_in('title', :with => 'Alice in Wonderland')
     fill_in('author_last', :with => 'Carroll')
     fill_in('author_first', :with => 'Lewis')

@@ -14,6 +14,48 @@
     <h1>Welcome to the librarian portal</h1>
   </div> -->
 </div>
+<hr>
+
+<div class="administrative">
+  <h3>Patron login:</h3>
+  <form action="/patrons" method="post">
+    <label for="first_name">First name:</label>
+    <input type="text" name="first_name" required>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" required>
+
+    <label for="phone_num">Phone number:</label>
+    <input type="text" name="phone_num" required>
+
+    <button class="button" type="submit" name="button">Login</button>
+  </form>
+</div>
+
+<hr>
+
+<div id="search-nav">
+  <div id="search_title">
+    <h3>Search by Title:</h3>
+    <form action="/search/title" method="post">
+      <label for="title_search">Title:</label>
+      <input type="text" name="title_search">
+
+      <button class="button" type="submit" name="button">Find book</button>
+    </form>
+  </div>
+
+  <div id="search_author">
+    <h3>Search by Author:</h3>
+    <form action="/search/author" method="post">
+
+      <label for="author_last_search">Author's Last Name:</label>
+      <input type="text" name="author_last_search">
+
+      <button class="button"  requiredtype="submit" name="button">Find author</button>
+    </form>
+  </div>
+</div>
 
 <hr>
 
@@ -24,16 +66,16 @@
       <td>TITLE</td>
       <td>AUTHOR (last, first)</td>
       <td>GENRE</td>
-      <!-- <td class="administrative"></td>
-      <td class="administrative"></td> -->
+      <!-- <td></td> -->
+      <!-- <td class="administrative"></td> -->
     </tr>
     <% @books.each() do |book| %>
       <tr>
         <td><%= book.title() %></td>
         <td><%= book.author_last() %>, <%= book.author_first() %></td>
         <td><%= book.genre() %></td>
-        <!-- <td class="administrative"><a href="/books/<%= book.id() %>/edit">EDIT</a></td>
-        <td class="administrative">
+        <!-- <td><a href="/books/<%= book.id() %>/checkout">CHECKOUT</a></td> -->
+        <!-- <td class="administrative">
           <form action="/books/<%= book.id() %>" method="post">
             <input name="_method" type="hidden" value="delete">
             <button id="delete_button" type="submit">DELETE</button>
@@ -45,43 +87,3 @@
 <% else %>
   <h3>There are no books in the database. <span id="add_book_instruction" class="administrative"> Please alert a librarian.</span></h3>
 <% end %>
-
-<!-- <div class="administrative">
-  <h3>Add a book:</h3>
-
-  <form action="/books" method="post">
-    <label for="title">Title:</label>
-    <input type="text" name="title" required>
-
-    <label for="author_last">Author's Last Name:</label>
-    <input type="text" name="author_last" required>
-
-    <label for="author_first">Author's First Name:</label>
-    <input type="text" name="author_first" required>
-
-    <label for="genre">Genre:</label>
-    <input type="text" name="genre" required>
-
-    <button class="button" type="submit" name="button">Add book</button>
-
-  </form>
-</div> -->
-
-<hr>
-
-<h3>Search by Title:</h3>
-<form action="/search/title" method="post">
-  <label for="title_search">Title:</label>
-  <input type="text" name="title_search">
-
-  <button class="button" type="submit" name="button">Find book</button>
-</form>
-
-<h3>Search by Author:</h3>
-<form action="/search/author" method="post">
-
-  <label for="author_last_search">Author's Last Name:</label>
-  <input type="text" name="author_last_search">
-
-  <button class="button"  requiredtype="submit" name="button">Find author</button>
-</form>

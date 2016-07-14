@@ -1,6 +1,8 @@
 require('sinatra')
 require('sinatra/reloader')
 require('./lib/book')
+require('./lib/patron')
+require('./lib/checkout')
 require('pg')
 also_reload('lib/**/*.rb')
 
@@ -16,6 +18,28 @@ get('/librarian') do
   @books = Book.all()
   @@librarian = true
   erb(:librarian)
+end
+
+get('/patrons/:id') do
+  @books = Book.all()
+  @patron = Patron.find(params.fetch('id').to_i())
+  @@patron = true
+  erb(:patron)
+end
+
+post('/patrons') do
+  first_name = params.fetch('first_name')
+  last_name = params.fetch('last_name')
+  phone_num = params.fetch('phone_num')
+  if Patron.confirm_by_all(first_name, last_name, phone_num)
+    @id = Patron.find_by_all(first_name, last_name, phone_num).to_i()
+    @patron = Patron.find(@id)
+  else
+    @patron = Patron.new({:id => nil, :first_name => first_name, :last_name => last_name, :phone_num => phone_num})
+    @patron.save()
+  end
+  @books = Book.all()
+  erb(:patron)
 end
 
 post('/books') do
@@ -41,6 +65,12 @@ end
 get('/books/:id/edit') do
   @book = Book.find(params.fetch('id').to_i())
   erb(:book_edit)
+end
+
+get('/patrons/:patron_id/books/:book_id/checkout') do
+  @patron = Patron.find(params.fetch('patron_id').to_i())
+  @book = Book.find(params.fetch('book_id').to_i())
+  erb(:checkout_form)
 end
 
 patch('/books/:id') do
@@ -81,4 +111,16 @@ post('/search/author') do
   @search_term = author_last
   @search_results = Book.search_author(author_last)
   erb(:search_results)
+end
+
+post('/patrons/:patron_id/books/:book_id/checkout') do
+  date = params.fetch('date')
+  @patron = Patron.find(params.fetch('patron_id').to_i())
+  patrons_id = @patron.id()
+  @book = Book.find(params.fetch('book_id').to_i())
+  books_id = @book.id()
+  checkout = Checkout.new({:id => nil, :date => date, :books_id => books_id, :patrons_id => patrons_id})
+  checkout.save()
+  @books = Book.all()
+  erb(:patron)
 end

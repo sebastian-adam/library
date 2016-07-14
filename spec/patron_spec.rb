@@ -62,4 +62,14 @@ describe(Patron) do
     end
   end
 
+  describe('.find') do
+    it('returns a patron by its id') do
+      patron1 = Patron.new({:id => nil, :first_name => 'Alice', :last_name => 'Lewis', :phone_num => '5552349876', :books_id => 1})
+      patron1.save()
+      patron2 = Patron.new({:id => nil, :first_name => 'Ben', :last_name => 'Christian', :phone_num => '5552387876', :books_id => 2})
+      patron2.save()
+      expect(Patron.find(patron1.id())).to(eq(patron1))
+    end
+  end
+
 end
