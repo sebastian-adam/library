@@ -44,4 +44,8 @@ class Checkout
     DB.exec("DELETE FROM checkouts WHERE id = #{self.id()};")
   end
 
+  define_method(:due) do
+    DB.exec("SELECT #{self.date()}, DATEADD(dd, 14, #{self.date()}) AS DueDate FROM checkouts WHERE id = #{self.id()};")
+  end
+
 end

@@ -40,17 +40,17 @@ class Patron
     found_patron
   end
 
-  define_singleton_method(:confirm_by_all) do |first, last, phone|
-    found_patron = false
+  define_singleton_method(:confirm_by_all?) do |first, last, phone|
+    patron_exists = false
     Patron.all().each() do |patron|
       if patron.first_name().==(first).&(patron.last_name().==(last)).&(patron.phone_num().==(phone))
-        found_patron = true
+        patron_exists = true
       end
     end
-    found_patron
+    patron_exists
   end
 
-  define_singleton_method(:find_by_all) do |first, last, phone|
+  define_singleton_method(:find_id_by_all) do |first, last, phone|
     found_patron_id = nil
     Patron.all().each() do |patron|
       if patron.first_name().==(first).&(patron.last_name().==(last)).&(patron.phone_num().==(phone))

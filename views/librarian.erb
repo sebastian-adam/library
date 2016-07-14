@@ -83,7 +83,7 @@
         <td class="administrative">
           <form action="/books/<%= book.id() %>" method="post">
             <input name="_method" type="hidden" value="delete">
-            <button id="delete_button" type="submit">DELETE</button>
+            <button class="delete_button" type="submit">DELETE</button>
           </form>
         </td>
       </tr>
@@ -91,6 +91,37 @@
   </table>
 <% else %>
   <h3>There are no books in the database. <span id="add_book_instruction" class="administrative"> Please add one below.</span></h3>
+<% end %>
+
+<hr>
+
+<% if @checkouts.any?() %>
+  <h3>Here is a list of books that are checked out.</h3>
+  <table>
+    <tr id="table_head">
+      <td>Checked out on</td>
+      <td>BOOK</td>
+      <td>PATRON</td>
+      <td></td>
+      <!-- <td class="administrative"></td> -->
+    </tr>
+    <% @checkouts.each() do |checkout| %>
+      <tr>
+        <td><%= checkout.date() %></td>
+        <td><%=Book.find(checkout.books_id()).title()%></td>
+        <td><%=Patron.find(checkout.patrons_id()).first_name()%></td>
+        <td><%= checkout.due() %></td>
+        <td class="administrative">
+          <form action="/checkouts/<%= checkout.id() %>" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button class="delete_button" type="submit">Book Returned</button>
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3>There are no books checked out.</h3>
 <% end %>
 
 <hr>

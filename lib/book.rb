@@ -42,11 +42,11 @@ class Book
     found_book
   end
 
-  define_singleton_method(:search_title) do |keyword|
+  define_singleton_method(:find_by_title) do |title|
     found_books = []
     found_book = nil
     Book.all().each() do |book|
-      if book.title().==(keyword)
+      if book.title().==(title)
         found_book = book
         found_books.push(book)
       end
@@ -54,11 +54,11 @@ class Book
     found_books
   end
 
-  define_singleton_method(:search_author) do |keyword|
+  define_singleton_method(:find_by_author) do |author|
     found_books = []
     found_book = nil
     Book.all().each() do |book|
-      if book.author_last().==(keyword)
+      if book.author_last().==(author)
         found_book = book
         found_books.push(book)
       end

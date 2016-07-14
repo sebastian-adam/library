@@ -16,7 +16,7 @@ td {
   font-weight: bold;
 }
 
-#delete_button {
+.delete_button {
   background-color: inherit;
   border: none;
   color: red;
