@@ -1,3 +1,11 @@
+<div id="header">
+  <div id="patron_portal_header">
+    <h1>Your search the <span class="glyphicon glyphicon-book"></span> results</h1>
+  </div>
+</div>
+
+<hr>
+
 <% if @search_results.any?() %>
   <h3>Here is your search results for "<%= @search_term %>"</h3>
   <table>
@@ -24,5 +32,17 @@
     <% end %>
   </table>
 <% else %>
-  <h3>No results found.</h3>
+  <h3>No results found for "<%= @search_term %>".</h3>
+<% end %>
+
+<hr>
+
+<% if @@librarian.==(true) %>
+  <form action="/librarian" method="get">
+    <button class="home_button" type="submit">Home</button>
+  </form>
+<% else %>
+  <form action="/" method="get">
+    <button class="home_button" type="submit">Home</button>
+  </form>
 <% end %>

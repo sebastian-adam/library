@@ -22,6 +22,60 @@ td {
   color: red;
 }
 
-.administrative {
+#edit_link {
+  color: #0000cd;
+}
+
+/*.administrative {
   display: none;
+}*/
+
+#add_book_instruction {
+  color: red;
+}
+
+#prompt, #librarian_portal_header, #patron_portal_header {
+  overflow:auto;
+  color: white;
+  background-color: black;
+  padding: 20px 30px 30px 30px;
+  margin-top: 10px;
+}
+
+#librarian_portal_header h1, #patron_portal_header h1 {
+  font-size: 70px;
+}
+
+#prompt {
+  text-align: right;
+  margin-right: 20px;
+}
+
+/*#librarian_portal_header {
+  display: none;
+}*/
+
+#patron_portal_header {
+  float: left;
+  margin-right: 20px;
+}
+
+#header {
+  background-color: black;
+  overflow:auto;
+  margin-top: 10px;
+}
+
+#lib_button {
+  background-color: inherit;
+}
+
+.button {
+  background-color: #e6fff2;
+  color: black;
+}
+
+.home_button {
+  background-color: black;
+  color: white;
 }
