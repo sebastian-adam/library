@@ -95,7 +95,7 @@
 
 <hr>
 
-<% if @checkouts.any?() %>
+<% if @checkouts.any?() & @books.any?() %>
   <h3>Here is a list of books that are checked out.</h3>
   <table>
     <tr id="table_head">

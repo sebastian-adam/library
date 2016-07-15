@@ -37,9 +37,9 @@ post('/patrons') do
     @patron = Patron.find(@id)
     @header = "Welcome back"
   else
+    @header = "Welcome"
     @patron = Patron.new({:id => nil, :first_name => first_name, :last_name => last_name, :phone_num => phone_num})
     @patron.save()
-    @header = "Welcome"
   end
   @books = Book.all()
   @checkouts = Checkout.all()
@@ -88,6 +88,7 @@ post('/patrons/:patron_id/books/:book_id/checkout') do
   checkout.save()
   @books = Book.all()
   @checkouts = Checkout.all()
+  @header = "Welcome"
   erb(:patron)
 end
 

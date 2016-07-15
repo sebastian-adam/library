@@ -63,7 +63,7 @@
 
 <hr>
 
-<% if @checkouts.any?() %>
+<% if @checkouts.any?() & @books.any?() %>
   <h3>Here is a list of books that you have checked out.</h3>
   <table>
     <tr id="table_head">
@@ -79,8 +79,10 @@
     <% end %>
   </table>
 <% else %>
-  <h3>You better start reading!.</h3>
+  <h3>You have not checked out any books.</h3>
 <% end %>
+
+<hr>
 
 <% if @books.any?() %>
   <h3>Here is a list of books in our database.</h3>
